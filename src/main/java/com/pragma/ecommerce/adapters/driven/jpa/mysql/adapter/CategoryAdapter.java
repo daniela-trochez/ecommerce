@@ -5,6 +5,8 @@ import com.pragma.ecommerce.adapters.driven.jpa.mysql.mapper.ICategoryEntityMapp
 import com.pragma.ecommerce.adapters.driven.jpa.mysql.repository.ICategoryRepository;
 import com.pragma.ecommerce.domain.model.Category;
 import com.pragma.ecommerce.domain.spi.ICategoryPersistencePort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -29,5 +31,11 @@ public class CategoryAdapter implements ICategoryPersistencePort {
     @Override
     public boolean existsByName(String name) {
         return categoryRepository.existsByName(name);
+    }
+
+    @Override
+    public Page<Category> listCategories(Pageable pageable) {
+        Page<CategoryEntity> categoryEntities = categoryRepository.findAll(pageable);
+        return categoryEntities.map(categoryEntityMapper::toModel);
     }
 }

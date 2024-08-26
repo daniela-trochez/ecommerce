@@ -9,5 +9,6 @@ import org.mapstruct.Mapper;
 public interface ICategoryEntityMapper {
 
     CategoryEntity toEntity(Category category);
+
     Category toModel(CategoryEntity categoryEntity);
 }

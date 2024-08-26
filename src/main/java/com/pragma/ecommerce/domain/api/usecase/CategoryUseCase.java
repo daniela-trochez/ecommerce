@@ -5,6 +5,8 @@ import com.pragma.ecommerce.domain.exception.*;
 import com.pragma.ecommerce.domain.model.Category;
 import com.pragma.ecommerce.domain.spi.ICategoryPersistencePort;
 import com.pragma.ecommerce.domain.util.ConstantsDomain;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public class CategoryUseCase implements ICategoryServicePort {
 
@@ -28,6 +30,7 @@ public class CategoryUseCase implements ICategoryServicePort {
 
     }
 
+
     private void validateCategory(Category category) {
 
         if (category.getName() == null || category.getName().isEmpty()) {
@@ -48,6 +51,15 @@ public class CategoryUseCase implements ICategoryServicePort {
 
 
     }
+
+    @Override
+    public Page<Category> listCategories(Pageable pageable) {
+        return categoryPersistencePort.listCategories(pageable);
+    }
+
+
+
+
 
 
 }
